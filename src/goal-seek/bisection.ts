@@ -7,23 +7,28 @@ export function bisectionGoalSeek(
   maxIterations: number = 1000,
   currentIteration: number = 0
 ): number | null {
-    const input = (lowerBound + upperBound) / 2;
+  let lower = lowerBound;
+  let upper = upperBound;
+  let mid: number;
 
-    const result = fn(input);
+  for (
+    let currentIteration = 0;
+    currentIteration < maxIterations;
+    currentIteration++
+  ) {
+    mid = (lower + upper) / 2;
+    const result = fn(mid);
 
     if (Math.abs(result - target) < tolerance) {
-        return input;
-    }
-
-    let nextIteration = currentIteration + 1;
-
-    if (nextIteration >= maxIterations) {
-        return null; // max iterations reached, no solution found!
+      return mid;
     }
 
     if (result < target) {
-        return bisectionGoalSeek(fn, target, input, upperBound, tolerance, maxIterations, nextIteration);
+      lower = mid;
     } else {
-        return bisectionGoalSeek(fn, target, lowerBound, input, tolerance, maxIterations, nextIteration);
+      upper = mid;
     }
+  }
+
+  return null;
 }
