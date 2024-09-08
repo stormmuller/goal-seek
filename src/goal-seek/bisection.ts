@@ -4,8 +4,7 @@ export function bisectionGoalSeek(
   lowerBound: number,
   upperBound: number,
   tolerance: number = 0.0001,
-  maxIterations: number = 1000,
-  currentIteration: number = 0
+  maxIterations: number = 1000
 ): number | null {
   let lower = lowerBound;
   let upper = upperBound;

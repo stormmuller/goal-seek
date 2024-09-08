@@ -11,3 +11,14 @@ test('simple bisection', () => {
 
     expect(solution).toBeCloseTo(50);
 })
+
+test('unsolvable with newton bisection', () => {
+    const fn = (x: number) => 27 * Math.pow(x, 3) - (3 * x) + 1;
+    const target = 0;
+    const lowerBound = -1;
+    const upperBound = 1;
+
+    const solution = bisectionGoalSeek(fn, target, lowerBound, upperBound);
+
+    expect(solution).toBeCloseTo(-0.44);
+})
